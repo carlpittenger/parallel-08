@@ -31,7 +31,7 @@ void generatePrefixSumData(int *const arr, const size_t n) {
     if (i % 2 == 0) {
       arr[i] = (int)(i / 2);
     } else {
-      arr[i] = (int)-(i / 2);
+      arr[i] = (int)(-(i / 2));
     }
   }
 }

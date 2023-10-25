@@ -44,12 +44,15 @@ void checkMergeSortResult(const int *arr, size_t n);
   const auto num_threads = std::atoi(argv[2]);
 
   // get arr data
-  auto *const arr = new int[n];
+  const auto arr = new int[n];
   generateMergeSortData(arr, n);
 
   // start timing
   const auto start = std::chrono::system_clock::now();
+  
   // insert sorting code here
+
+  
 
   // printArray(arr, n);
   // end time
