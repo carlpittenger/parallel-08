@@ -43,15 +43,25 @@ void checkPrefixSumResult(const int *arr, size_t n);
 
   const auto n = std::atoi(argv[1]);
   const auto num_threads = std::atoi(argv[2]);
-  auto *const arr = new int[n];
+  const auto arr = new int[n];
   generatePrefixSumData(arr, n);
 
-  const auto *const pr = new int[n + 1];
-
-  // insert prefix sum code here
+  const auto pr = new int[n + 1];
+  // initial value for prefix sum
+  pr[0] = 0;
 
   // start timing
   const auto start = std::chrono::system_clock::now();
+
+// insert prefix sum code here
+// Parallel loop to compute the prefix sum
+#pragma omp parallel num_threads(num_threads)
+  {
+#pragma omp for schedule(static)
+    for (auto i = 0; i < n; ++i) {
+      pr[i + 1] = pr[i] + arr[i];
+    }
+  }
 
   // end time
   const auto end = std::chrono::system_clock::now();
