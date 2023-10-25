@@ -35,8 +35,7 @@ auto prefix_sum(const int *const arr, const int n, int *const ptr,
   const auto chunk_size = n / num_threads;
 
   // step 1: compute prefix sums for each chunk in parallel
-#pragma omp parallel num_threads(num_threads) default(none)                    \
-    shared(n, chunk_size, ptr, arr, num_threads)
+#pragma omp parallel num_threads(num_threads)
   {
     const auto thread_id = omp_get_thread_num();
     const auto start = thread_id * chunk_size;
@@ -50,8 +49,7 @@ auto prefix_sum(const int *const arr, const int n, int *const ptr,
   }
 
 // step 2: adjust prefix sums for chunk boundaries
-#pragma omp parallel num_threads(num_threads) default(none)                    \
-    shared(n, chunk_size, ptr, num_threads)
+#pragma omp parallel num_threads(num_threads)
   {
     const auto thread_id = omp_get_thread_num();
     const auto start = thread_id * chunk_size;
